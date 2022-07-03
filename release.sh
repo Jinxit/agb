@@ -74,7 +74,7 @@ if [ "$PROJECT" = "agb" ]; then
     sed -i -e "s/^agb = \".*\"/agb = \"$VERSION\"/" template/Cargo.toml
     git add template/Cargo.toml
 
-    for EXAMPLE_TOML_FILE in examples/*/Cargo.toml book/games/*/Cargo.toml; do
+    for EXAMPLE_TOML_FILE in examples/*/Cargo.toml book/games/*/Cargo.toml template/Cargo.toml; do
         EXAMPLE_DIR=$(dirname "$EXAMPLE_TOML_FILE")
         sed -E -i -e "/agb =/ s/version = \"[^\"]+\"/version = \"$VERSION\"/" "$EXAMPLE_DIR/Cargo.toml"
         (cd "$EXAMPLE_DIR" && cargo update)
