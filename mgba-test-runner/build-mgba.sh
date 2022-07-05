@@ -1,17 +1,19 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 MGBA_VERSION=$1
 OUT_DIRECTORY=$2
 CURRENT_DIRECTORY=$(pwd)
 
+if [[ ! -f mgba-${MGBA_VERSION}.tar.gz ]]; then
+	curl -L https://github.com/mgba-emu/mgba/archive/refs/tags/${MGBA_VERSION}.tar.gz -o mgba-${MGBA_VERSION}.tar.gz
+fi
+
+cp mgba-${MGBA_VERSION}.tar.gz ${OUT_DIRECTORY}
+
 cd ${OUT_DIRECTORY}
 
 if [[ -f libmgba-cycle.a ]]; then
 	exit 0
-fi
-
-if [[ ! -f mgba-${MGBA_VERSION}.tar.gz ]]; then
-	curl -L https://github.com/mgba-emu/mgba/archive/refs/tags/${MGBA_VERSION}.tar.gz -o mgba-${MGBA_VERSION}.tar.gz
 fi
 
 tar -xvf mgba-${MGBA_VERSION}.tar.gz
